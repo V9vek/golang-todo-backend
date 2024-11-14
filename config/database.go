@@ -3,21 +3,21 @@ package config
 import (
 	"database/sql"
 	"fmt"
+	"os"
 	"todo-backend/utils"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
-	host     = "localhost"
-	port     = 3306
-	user     = "root"
-	password = ""
-	dbName   = "todo_app"
+	host   = "localhost"
+	port   = 3306
+	user   = "root"
+	dbName = "todo_app"
 )
 
 func DatabaseConnection() *sql.DB {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", user, password, host, port, dbName)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", user, os.Getenv("DB_PASSWORD"), host, port, dbName)
 	driverName := "mysql"
 
 	db, err := sql.Open(driverName, dsn)

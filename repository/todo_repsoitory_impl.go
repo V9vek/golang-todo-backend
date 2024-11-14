@@ -22,7 +22,7 @@ func (t *TodoRepositoryImpl) Add(ctx context.Context, todo model.Todo) {
 	utils.PanicIfError(err)
 	defer utils.CommitOrRollback(tx)
 
-	SQL_QUERY := "insert into todos(title, description) value(?,?)"
+	SQL_QUERY := "INSERT INTO todos(title, description) VALUES (?, ?)"
 	_, errExec := tx.ExecContext(ctx, SQL_QUERY, todo.Title, todo.Description)
 	utils.PanicIfError(errExec)
 }
